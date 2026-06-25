@@ -2,38 +2,146 @@
 
 ## Overview
 
-AI Business Research Agent is an intelligent research assistant that helps users find, verify, organize, and summarize business information from publicly available internet sources. The system is designed to provide reliable and structured business insights efficiently.
+AI Business Research Agent is an intelligent business discovery and research platform that automatically finds, extracts, verifies, organizes, and summarizes business information from publicly available internet sources.
+
+The application helps users quickly discover businesses in a specific category and location while providing structured and verified results.
 
 ## Problem Statement
 
-Businesses and professionals often spend significant time searching for reliable business information across multiple sources. Manual research can be slow, inconsistent, and difficult to verify.
+Finding reliable business information manually requires searching multiple websites, collecting data, removing duplicates, verifying authenticity, and organizing results.
+
+This process is time-consuming and inefficient.
 
 ## Solution
 
-This AI-powered agent automates the business research process by collecting information from public sources, organizing the data, and generating concise summaries to help users make informed decisions.
+The AI Business Research Agent automates the complete business research workflow:
+
+- Parses user queries
+- Searches relevant businesses online
+- Extracts business information
+- Verifies extracted data
+- Removes duplicate entries
+- Generates AI-powered summaries
+- Exports results to CSV
 
 ## Features
 
-- Business information discovery
-- Automated research workflow
-- Data collection and organization
-- AI-powered summarization
-- Structured output generation
-- Fast and efficient processing
+### Query Parsing
+Converts natural language queries into structured search parameters.
+
+Example:
+
+```text
+Dentists in Austin
+```
+
+### Business Discovery
+
+Searches publicly available web sources for businesses matching the query.
+
+### Data Extraction
+
+Extracts:
+
+- Business Name
+- Website
+- Contact Information
+- Address
+- Description
+
+### Verification System
+
+Assigns verification scores to business records.
+
+### Deduplication
+
+Removes duplicate business entries.
+
+### AI Summary Generation
+
+Generates concise business research summaries.
+
+### CSV Export
+
+Exports final results for further analysis.
 
 ## Technology Stack
 
 - Python
-- FastAPI
-- GitHub
-- AI/LLM Integration
+- Streamlit
+- Pandas
+- DuckDuckGo Search (DDGS)
+- Web Scraping
+- AI Summarization
+
+## Architecture
+
+```text
+User Query
+      │
+      ▼
+Query Parser
+      │
+      ▼
+Business Search Engine
+      │
+      ▼
+Data Extraction
+      │
+      ▼
+Verification Engine
+      │
+      ▼
+Deduplication
+      │
+      ▼
+Summary Generator
+      │
+      ▼
+Final Business Report
+```
+
+## Workflow
+
+1. User enters a business query.
+2. Query is parsed into category and location.
+3. Businesses are searched online.
+4. Business details are extracted.
+5. Verification scores are calculated.
+6. Duplicate records are removed.
+7. AI summary is generated.
+8. Results are displayed and exported.
+
+## Example Query
+
+```text
+Dentists in Austin
+```
+
+## Example Output
+
+```text
+Business Name
+Website
+Address
+Verification Score
+Summary
+```
 
 ## Project Structure
 
 ```text
 AI-Business-Agent/
+│
 ├── main.py
-├── search.py
+├── modules/
+│   ├── parser.py
+│   ├── search.py
+│   ├── extractor.py
+│   ├── verifier.py
+│   ├── dedupe.py
+│   └── summarizer.py
+│
 ├── README.md
 ```
 
@@ -43,54 +151,23 @@ AI-Business-Agent/
 pip install -r requirements.txt
 ```
 
-## Running the Application
+## Run
 
 ```bash
-python main.py
+streamlit run main.py
 ```
 
-or
+## Future Improvements
 
-```bash
-uvicorn main:app --reload
-```
-
-## Workflow
-
-1. User enters a business-related query.
-2. The agent searches public sources.
-3. Information is collected and organized.
-4. Data is verified and filtered.
-5. AI generates a concise summary.
-6. Results are presented to the user.
-
-## Example Query
-
-```text
-Cardiologists in Birmingham
-```
-
-## Expected Output
-
-```text
-Business Name
-Address
-Contact Information
-Website
-Business Summary
-```
-
-## Future Enhancements
-
-- PDF report generation
 - Multi-language support
-- Advanced analytics dashboard
-- Real-time monitoring
-- Export to Excel and CSV
+- PDF Report Generation
+- Business Ranking System
+- Interactive Analytics Dashboard
+- Real-Time Monitoring
 
 ## Team Member
 
-- N. Nega
+N. Nega
 
 ## GitHub Repository
 
@@ -98,12 +175,12 @@ https://github.com/Nega-N/chettinad-code-fest
 
 ## Demo Video
 
-To be added
+(Add YouTube Link Here)
 
 ## Presentation Slides
 
-To be added
+(Add PPT Link Here)
 
 ## License
 
-This project was developed for educational and hackathon purposes.
+Developed for Hackathon and Educational Purposes.
