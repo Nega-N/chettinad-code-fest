@@ -1,186 +1,419 @@
-# AI Business Research Agent
+# 🔍 AI Business Research Agent
 
-## Overview
+An intelligent business discovery and research platform that automatically searches, extracts, verifies, organizes, and summarizes business information from publicly available internet sources.
 
-AI Business Research Agent is an intelligent business discovery and research platform that automatically finds, extracts, verifies, organizes, and summarizes business information from publicly available internet sources.
+Developed for **Chettinad CodeFest 2026**.
 
-The application helps users quickly discover businesses in a specific category and location while providing structured and verified results.
+---
 
-## Problem Statement
+# 📌 Overview
 
-Finding reliable business information manually requires searching multiple websites, collecting data, removing duplicates, verifying authenticity, and organizing results.
+AI Business Research Agent helps users quickly discover businesses based on a category and location. Instead of manually browsing multiple websites, the system automates the entire research workflow.
 
-This process is time-consuming and inefficient.
+Given a query such as:
 
-## Solution
+> Dentists in Austin
 
-The AI Business Research Agent automates the complete business research workflow:
+the application:
 
-- Parses user queries
-- Searches relevant businesses online
+- Parses the user query
+- Searches the web for businesses
+- Visits business websites
 - Extracts business information
 - Verifies extracted data
-- Removes duplicate entries
-- Generates AI-powered summaries
-- Exports results to CSV
+- Removes duplicate records
+- Generates research statistics
+- Allows CSV download
 
-## Features
+The project is designed to behave like an intelligent business researcher rather than a simple web scraper.
 
-### Query Parsing
-Converts natural language queries into structured search parameters.
+---
 
-Example:
+# 🚀 Features
 
-```text
-Dentists in Austin
+- Natural language business search
+- Intelligent query parsing
+- Business discovery using DuckDuckGo Search
+- Automatic webpage extraction
+- Phone number extraction
+- Email extraction
+- Website extraction
+- Business verification scoring
+- Duplicate detection
+- Research summary generation
+- Interactive Streamlit dashboard
+- CSV export
+
+---
+
+# 🏗️ Project Structure
+
+```
+AI_Business_Research_Agent/
+│
+├── app.py
+│
+├── modules/
+│   ├── parser.py
+│   ├── search.py
+│   ├── extractor.py
+│   ├── entity_extractor.py
+│   ├── filter.py
+│   ├── verifier.py
+│   ├── dedupe.py
+│   └── summarizer.py
+│
+├── requirements.txt
+├── README.md
+└── assets/
 ```
 
-### Business Discovery
+---
 
-Searches publicly available web sources for businesses matching the query.
-
-### Data Extraction
-
-Extracts:
-
-- Business Name
-- Website
-- Contact Information
-- Address
-- Description
-
-### Verification System
-
-Assigns verification scores to business records.
-
-### Deduplication
-
-Removes duplicate business entries.
-
-### AI Summary Generation
-
-Generates concise business research summaries.
-
-### CSV Export
-
-Exports final results for further analysis.
-
-## Technology Stack
+# ⚙️ Technology Stack
 
 - Python
 - Streamlit
 - Pandas
-- DuckDuckGo Search (DDGS)
-- Web Scraping
-- AI Summarization
+- Requests
+- BeautifulSoup4
+- DDGS (DuckDuckGo Search)
+- Regular Expressions
 
-## Architecture
+---
 
-```text
+# 🔄 System Workflow
+
+```
 User Query
       │
       ▼
 Query Parser
       │
       ▼
-Business Search Engine
+DuckDuckGo Search
       │
       ▼
-Data Extraction
+Business URLs
       │
       ▼
-Verification Engine
+Information Extractor
       │
       ▼
-Deduplication
+Business Verification
       │
       ▼
-Summary Generator
+Duplicate Removal
       │
       ▼
-Final Business Report
+Summary Generation
+      │
+      ▼
+Results + CSV Download
 ```
 
-## Workflow
+---
 
-1. User enters a business query.
-2. Query is parsed into category and location.
-3. Businesses are searched online.
-4. Business details are extracted.
-5. Verification scores are calculated.
-6. Duplicate records are removed.
-7. AI summary is generated.
-8. Results are displayed and exported.
+# 📂 Module Description
 
-## Example Query
+## app.py
 
-```text
+Main application controller.
+
+Responsibilities:
+
+- Creates Streamlit interface
+- Reads user input
+- Calls all processing modules
+- Displays results
+- Generates summary
+- Downloads CSV
+
+---
+
+## parser.py
+
+Parses user queries into structured data.
+
+Example
+
+Input
+
+```
 Dentists in Austin
 ```
 
-## Example Output
+Output
 
-```text
-Business Name
-Website
-Address
-Verification Score
+```python
+{
+    "category": "Dentists",
+    "location": "Austin"
+}
+```
+
+---
+
+## search.py
+
+Searches businesses using DuckDuckGo Search.
+
+Returns
+
+- Business title
+- Website URL
+- Description
+
+---
+
+## extractor.py
+
+Downloads webpages and extracts:
+
+- Business Name
+- Website
+- Phone Number
+- Email Address
+
+Uses:
+
+- Requests
+- BeautifulSoup
+- Regex
+
+---
+
+## entity_extractor.py
+
+Filters directory websites such as:
+
+- Yelp
+- WebMD
+- OpenCare
+- ZocDoc
+
+Returns only valid business websites.
+
+---
+
+## filter.py
+
+Rejects invalid webpages including:
+
+- Cloudflare pages
+- Empty pages
+- Directory listings
+- Invalid business records
+
+---
+
+## verifier.py
+
+Calculates verification score.
+
+| Field | Score |
+|--------|------:|
+| Website | 30 |
+| Phone | 35 |
+| Email | 35 |
+
+Maximum Score = **100**
+
+---
+
+## dedupe.py
+
+Removes duplicate businesses using website URLs or business names.
+
+---
+
+## summarizer.py
+
+Generates research statistics:
+
+- Total businesses
+- Verified businesses
+- Phone availability
+- Email availability
+
+---
+
+# 📊 Example
+
+## Input
+
+```
+Lawyers in Chicago
+```
+
+## Output
+
+| Business | Website | Phone | Email | Verification |
+|----------|----------|-------|-------|--------------|
+| ABC Law Firm | abc.com | ✅ | ✅ | 100 |
+| XYZ Legal | xyzlegal.com | ✅ | ❌ | 65 |
+
 Summary
+
+```
+Total Businesses: 20
+
+Verified Businesses: 15
+
+Phone Coverage: 90%
+
+Email Coverage: 75%
 ```
 
-## Project Structure
+---
 
-```text
-AI-Business-Agent/
-│
-├── main.py
-├── modules/
-│   ├── parser.py
-│   ├── search.py
-│   ├── extractor.py
-│   ├── verifier.py
-│   ├── dedupe.py
-│   └── summarizer.py
-│
-├── README.md
+# 🛠️ Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/yourusername/AI_Business_Research_Agent.git
 ```
 
-## Installation
+Move into the project directory
+
+```bash
+cd AI_Business_Research_Agent
+```
+
+Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Run
+---
+
+# ▶️ Running the Application
 
 ```bash
-streamlit run main.py
+streamlit run app.py
 ```
 
-## Future Improvements
+The application will open in your default browser.
 
+---
+
+# 🔍 Example Queries
+
+```
+Dentists in Austin
+
+Restaurants in Chennai
+
+Hospitals in Bangalore
+
+Lawyers in Chicago
+
+Roofing Contractors in Dallas
+
+Plumbers in Houston
+
+Hotels in Singapore
+```
+
+---
+
+# 📁 Output
+
+The application displays:
+
+- Business Name
+- Website
+- Phone Number
+- Email Address
+- Verification Score
+
+It also provides:
+
+- Interactive data table
+- CSV download
+- Research summary
+
+---
+
+# ✅ Advantages
+
+- Saves manual research time
+- Automatically extracts business information
+- Removes duplicate records
+- Provides structured business intelligence
+- Easy-to-use interface
+- Modular architecture
+- Easily extendable
+
+---
+
+# 🔮 Future Enhancements
+
+- Google Maps Integration
+- AI-powered business summaries
+- Company logo extraction
+- Address extraction
+- Geolocation support
+- PDF report generation
+- Database integration
+- FastAPI REST API
 - Multi-language support
-- PDF Report Generation
-- Business Ranking System
-- Interactive Analytics Dashboard
-- Real-Time Monitoring
+- Analytics dashboard
 
-## Team Member
+---
 
-N. Nega
+# 📦 Requirements
 
-## GitHub Repository
+```
+Python 3.10+
 
-https://github.com/Nega-N/chettinad-code-fest
+streamlit
 
-## Demo Video
+pandas
 
-(Add YouTube Link Here)
+requests
 
-## Presentation Slides
+beautifulsoup4
 
-(Add PPT Link Here)
+ddgs
 
-## License
+lxml
+```
 
-Developed for Hackathon and Educational Purposes.
+Install all packages using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push the branch
+5. Create a Pull Request
+
+---
+
+# 📄 License
+
+This project was developed for **Chettinad CodeFest 2026** for educational and demonstration purposes.
+
+---
+
+# 👨‍💻 Authors
+
+**Team:** Tech Titans
+
+**Hackathon:** Chettinad CodeFest 2026
+
+**Institution:** SASTRA University
+
+---
